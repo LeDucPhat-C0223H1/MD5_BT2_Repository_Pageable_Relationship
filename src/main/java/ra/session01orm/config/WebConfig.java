@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -30,6 +31,7 @@ import java.util.Properties;
 @EnableWebMvc
 @ComponentScan(basePackages = {"ra.session01orm"})
 @EnableTransactionManagement
+@EnableJpaRepositories("ra.session01orm.reponsitory")
 public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
 
     // cấu hình thyme leaf

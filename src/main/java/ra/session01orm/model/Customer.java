@@ -25,6 +25,9 @@ public class Customer {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 
+    @Column(name = "address_id")
+    private String addressId;
+
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
@@ -33,14 +36,14 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(Long id, String name, String phone, Boolean sex, Date birthday) {
+    public Customer(Long id, String name, String phone, Boolean sex, Date birthday, String addressId) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.sex = sex;
         this.birthday = birthday;
+        this.addressId = addressId;
     }
-
 
     public Long getId() {
         return id;
@@ -78,7 +81,11 @@ public class Customer {
         return birthday;
     }
 
+    public String getAddressId() {
+        return addressId;
+    }
 
-
-
+    public void setAddressId(String addressId) {
+        this.addressId = addressId;
+    }
 }
