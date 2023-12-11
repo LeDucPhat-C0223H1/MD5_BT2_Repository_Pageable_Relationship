@@ -8,7 +8,7 @@ import ra.session01orm.model.Customer;
 
 import java.util.List;
 
-public interface ICustomerReponsitory extends CrudRepository<Customer, Long> {
+public interface ICustomerReponsitory extends CrudRepository<Customer, Long>  {
     // không cần định nghĩa các phương thức có sẵn
 
     List<Customer> findAllByNameContainingIgnoreCase(String name);
