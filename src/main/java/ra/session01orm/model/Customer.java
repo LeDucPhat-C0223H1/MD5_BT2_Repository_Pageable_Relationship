@@ -26,10 +26,6 @@ public class Customer {
     private Date birthday;
 
 
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
     public Customer() {
     }
 
@@ -76,6 +72,9 @@ public class Customer {
 
     public Date getBirthday() {
         return birthday;
+    }
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 
 

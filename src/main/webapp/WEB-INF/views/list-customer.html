@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title></title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid d-flex justify-content-between" style="background: orange">
+        <a class="navbar-brand" href="#">
+            <img src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30"
+                 height="24" class="d-inline-block align-text-top">
+            Navbar
+        </a>
+        <div class="" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link fs-5 fw-medium" href="/exercise14/home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fs-5 fw-medium" href="/exercise14/product">Product</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fs-5 fw-medium" href="/exercise14/about-us">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fs-5 fw-medium" href="/exercise14/profile">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fs-5 fw-medium" href="/exercise14/cart">Cart</a>
+                </li>
+            </ul>
+        </div>
+        <div class="navbar-brand d-flex gap-3">
+            <a href="#" class="btn" style="background: #FFCC33">Log In</a>
+            <a href="#" class="btn" style="background: #FFCC33">Sign Up</a>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container-fluid">
+    <h1>Danh sách sản phẩm</h1>
+    <!--Form tìm kiếm-->
+    <form role="search" action="" class="d-flex flex-row justify-content-between gap-2">
+        <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="inputSearch" th:value="${inputSearch}">
+        <div class="d-flex flex-row gap-2" style="min-width: 400px">
+            <select class="form-select" aria-label="Default select example" name="sortByTitle" th:value="${sortByTitle}">
+                <option value="name">Name</option>
+                <option value="address">Address</option>
+            </select>
+            <select class="form-select" aria-label="Default select example" name="sortBy" th:value="${sortBy}">
+                <option value="asc">Tăng dần</option>
+                <option value="desc">Giảm dần</option>
+            </select>
+        </div>
+        <input class="btn btn-outline-success" type="submit" value="SEARCH" name="action">
+    </form>
+    <br>
+    <!--Nút nhấn thêm mới sản phẩm-->
+    <a href="#">Thêm mới sản phẩm</a>
+
+    <!--Bảng hiển thị danh sách sản phẩm-->
+    <table class="table">
+        <thead class="table-primary">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Sex</th>
+            <th scope="col">Birthday</th>
+            <th scope="col" class="text-center">Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="c,loop : ${customers}">
+            <td th:text="${c.id}"></td>
+            <td th:text="${c.name}"></td>
+            <td th:text="${c.phone}"></td>
+            <td th:text="${c.sex}"></td>
+            <td th:text="${#dates.format(c.birthday, 'dd/MM/yyyy')}"></td>
+            <td>
+                <div class="d-flex justify-content-between">
+                    <a class="btn btn-info" href="#">Detail</a>
+                    <a class="btn btn-warning" href="#">Edit</a>
+                    <a onclick="return confirm('Bạn có chắc chắn muốn xóa không')"
+                       class="btn btn-danger" th:href="@{/c.id}">Delete</a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="?sort=name,asc">Tăng</a>
+    <a href="?sort=name,desc">Giảm</a>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item" th:if="${customers.hasPrevious()}">
+                <a class="page-link" th:href="@{/list-customer(page=${customers.getNumber()-1}, sort=${customers.sort})}">Previous</a>
+            </li>
+
+            <li class="page-item" th:each="p,loop : ${#numbers.sequence(1, customers.getTotalPages())}">
+                <a class="page-link" th:href="@{/list-customer(page=${loop.index})}" th:text="${loop.count}"></a>
+            </li>
+
+            <li class="page-item" th:if="${customers.hasNext()}">
+                <a class="page-link" th:href="@{/list-customer(page=${customers.getNumber()+1})}">Next</a>
+            </li>
+        </ul>
+    </nav></div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+</html>

@@ -7,6 +7,8 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -29,6 +31,8 @@ import java.util.Properties;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = {"ra.session01orm"})
+@EnableJpaRepositories(basePackages = {"ra.session01orm.reponsitory"})
+@EnableSpringDataWebSupport
 @EnableTransactionManagement
 public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
 
@@ -90,7 +94,7 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/md05_qlkh");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/md05_qlkh_11122013");
         dataSource.setUsername("root");
         dataSource.setPassword("Bencho@2808");
         return dataSource;
